@@ -16,15 +16,16 @@ DATA = {
         'сыр, ломтик': 1,
         'помидор, ломтик': 1,
     },
-    # можете добавить свои рецепты ;)
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+
+def recipe(requests, recipe=''):
+    persons = int(requests.GET.get("servings", 1))
+    dish_dict = DATA.get(recipe, {})
+    context = {
+        'recipe': {
+            ingredient: amount * persons
+            for ingredient, amount in dish_dict.items()
+        }
+    }
+    return render(requests, 'calculator/index.html', context)
