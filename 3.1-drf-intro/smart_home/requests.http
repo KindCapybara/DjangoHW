@@ -20,11 +20,14 @@ Content-Type: application/json
 ###
 
 # обновление датчика
-PATCH {{baseUrl}}/sensors/1/
+PATCH {{baseUrl}}/sensors/3/
 Content-Type: application/json
 
-{
-  "description": "Перенес датчик на балкон"
+{  
+  "name": "ESP64",
+  "description": "Перенес датчик на балкон",
+  "measurements": []
+
 }
 
 ###
@@ -34,12 +37,17 @@ POST {{baseUrl}}/measurements/
 Content-Type: application/json
 
 {
-  "sensor": 1,
-  "temperature": 22.3
+  "sensor": 3,
+  "temperature": 28.3
 }
 
 ###
 
 # получение информации по датчику
-GET {{baseUrl}}/sensors/1/
+GET {{baseUrl}}/sensors/3/
+Content-Type: application/json
+
+###
+# Выдается список с краткой информацией по датчикам
+GET {{baseUrl}}/list/
 Content-Type: application/json
